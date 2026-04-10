@@ -1,0 +1,112 @@
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    border-radius: 8px;
+    overflow: hidden;
+    top: 100%;
+    left: 0;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: var(--dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: var(--primary);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Add a small arrow icon style if needed */
+.dropbtn i {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+/* Mobile Responsive Dropdown */
+@media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+        position: relative;
+    }
+
+    .dropbtn {
+        width: 100%;
+        display: block;
+        padding: 1rem 2rem;
+        color: #e2e8f0;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown.active .dropbtn {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-left-color: #2196f3;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: rgba(0, 0, 0, 0.15);
+        width: 100%;
+        padding-left: 2rem;
+        display: none;
+        border-radius: 0;
+        margin-left: 0;
+        /* Keep hidden initially on mobile too */
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content a {
+        color: #cbd5e1;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        display: block;
+        border-left: 2px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content a:active {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-left-color: #2196f3;
+    }
+}
+
+/* Hide tab containers for sections with dropdown navigation */
+#students .tab-container,
+#teachers .tab-container,
+#fees .tab-container,
+#attendance .tab-container {
+    display: none !important;
+}

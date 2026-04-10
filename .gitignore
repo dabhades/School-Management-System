@@ -1,0 +1,14 @@
+# Firebase
+.firebase/
+.firebaserc
+firebase.json
+*.log
+
+# Dependencies
+node_modules/
+
+# Runtime config
+.runtimeconfig.json
+
+# Sensitive files
+firebase-config.js

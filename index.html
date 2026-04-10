@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARGET FOUNDATION CENTER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-functions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/dropdown.css">
+    <script src="src/js/firebase-config.js"></script>
+    <script src="src/js/auth.js" defer></script>
+    <script src="src/js/script.js" defer></script>
+    <script src="src/js/core.js" defer></script>
+    <script src="src/js/ui.js" defer></script>
+    <script src="src/js/students.js" defer></script>
+    <script src="src/js/teachers.js" defer></script>
+    <script src="src/js/fees.js" defer></script>
+    <script src="src/js/calendar.js" defer></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="Images/targetlogo.png" alt="Target Foundation Center Logo" class="nav-logo">
+                <h1 class="nav-title">TARGET FOUNDATION CENTER</h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <div class="dropdown">
+                    <a href="#students" class="nav-link dropbtn">Students <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-target-tab="#students-list">Students List</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#students-add">Add Student</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#students-bulk">Bulk Actions</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#teachers" class="nav-link dropbtn">Teachers <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-target-tab="#teachers-list">Teachers List</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#teachers-add">Add Teacher</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#teachers-bulk">Bulk Actions</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#teachers-analytics">Teacher Analytics</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#attendance" class="nav-link dropbtn">Attendance <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-target-tab="#mark-attendance">Mark Attendance</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#view-attendance">View Attendance</a>
+                    </div>
+                </div>
+                <a href="#calendar" class="nav-link">Calendar</a>
+                <div class="dropdown">
+                    <a href="#fees" class="nav-link dropbtn">Fees <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item" data-target-tab="#fee-records">Fee Records</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#add-payment">Add Payment</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#fee-structure">Fee Structure</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#assign-fees">Assign Fees</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#fee-reminders">Fee Reminders</a>
+                        <a href="#" class="dropdown-item" data-target-tab="#fee-analytics">Analytics</a>
+                    </div>
+                </div>
+                <button id="authButton" class="nav-action" type="button" aria-label="Sign out">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <main class="page-content">
+        <div id="app-alert"></div>
+
+        <section id="dashboard" class="tab-content active">
+            <h2 class="dashboard-heading">
+                <span class="material-icons dashboard-icon">dashboard</span> Dashboard
+            </h2>
+            <div class="card-grid">
+                <div class="card">
+                    <span class="card-icon"><span class="material-icons">person</span></span>
+                    <h3 class="card-value" id="teacherCount">0</h3>
+                    <p class="card-label">Teachers</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon"><span class="material-icons">school</span></span>
+                    <h3 class="card-value" id="studentCount">0</h3>
+                    <p class="card-label">Students</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon"><span class="material-icons">check_circle</span></span>
+                    <h3 class="card-value" id="attendanceCount">0</h3>
+                    <p class="card-label">Today's Attendance</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 2rem;">Today's Class-wise Attendance</h2>
+            <div class="card-grid" id="classAttendanceCharts">
+            </div>
+        </section>
+
+        <!-- Edit Student Modal -->
+        <div id="studentEditModal" class="modal" aria-hidden="true" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="editStudentModalTitle">Edit Student</h3>
+                    <button class="modal-close" id="editStudentModalClose" aria-label="Close">&times;</button>
+                </div>
+                <form id="editStudentForm">
+                    <div class="form-group">
+                        <label for="editStudentId">Student ID:</label>
+                        <input type="text" id="editStudentId" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="editStudentName">Name:</label>
+                        <input type="text" id="editStudentName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editStudentClass">Class:</label>
+                        <input type="text" id="editStudentClass" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editStudentPhone">Phone:</label>
+                        <input type="text" id="editStudentPhone" class="form-control">
+                    </div>
+                    <div class="btn-group" style="justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary" id="editStudentCancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="editStudentSave">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Generic View Modal for Student/Teacher Details -->
+        <div id="viewModal" class="modal" aria-hidden="true" role="dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="viewModalTitle">Details</h3>
+                    <button class="modal-close" id="viewModalClose" aria-label="Close">&times;</button>
+                </div>
+                <div id="viewModalBody" style="max-height:60vh; overflow:auto;">
+                    <!-- Dynamic details go here -->
+                </div>
+                <div style="display:flex; justify-content:flex-end; margin-top:1rem;">
+                    <button class="btn btn-secondary" id="viewModalOk">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="students" class="tab-content hidden">
+            <div class="tab-container">
+                <button class="tab-button active" data-tab-target="#students-list">Students List</button>
+                <button class="tab-button" data-tab-target="#students-add">Add Student</button>
+                <button class="tab-button" data-tab-target="#students-bulk">Bulk Actions</button>
+            </div>
+
+            <div id="students-list" class="tab-content-pane">
+                <h2>Students List</h2>
+                <div class="filter-container">
+                    <div class="form-group" style="flex-grow: 1;">
+                        <input type="text" id="studentSearch" class="form-control"
+                            placeholder="Search by name or ID...">
+                    </div>
+                    <div class="form-group" style="flex-grow: 1;">
+                        <select id="studentClassFilter" class="form-control">
+                            <option value="">Filter by Class</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="exportData('students')">Export All</button>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="name">Name</th>
+                            <th data-sort="class">Class</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="students-add" class="tab-content-pane hidden">
+                <h2><span id="studentModalTitle">Add New Student</span></h2>
+
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="studentId">Student ID:</label>
+                        <input type="text" id="studentId" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentName">Name:</label>
+                        <input type="text" id="studentName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentClass">Class:</label>
+                        <input type="text" id="studentClass" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPhone">Phone:</label>
+                        <input type="text" id="studentPhone" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="saveStudentBtn">Save Student</button>
+                </form>
+
+            </div>
+
+            <div id="students-bulk" class="tab-content-pane hidden">
+                <h2>Bulk Actions</h2>
+                <div class="form-group">
+                    <label for="studentBulkImport">Import Students (CSV):</label>
+                    <input type="file" id="studentBulkImport" accept=".csv" class="form-control">
+                </div>
+                <button class="btn btn-primary" onclick="importData('students')">Import Data</button>
+                <hr style="margin: 1rem 0;">
+                <button class="btn btn-secondary" onclick="downloadCsvTemplate('student')">Download Student
+                    Template</button>
+            </div>
+        </section>
+
+        <section id="teachers" class="tab-content hidden">
+            <div class="tab-container">
+                <button class="tab-button active" data-tab-target="#teachers-list">Teachers List</button>
+                <button class="tab-button" data-tab-target="#teachers-add">Add Teacher</button>
+                <button class="tab-button" data-tab-target="#teachers-bulk">Bulk Actions</button>
+                <button class="tab-button" data-tab-target="#teachers-analytics">Teacher Analytics</button>
+                <!-- New Teacher Analytics Tab -->
+            </div>
+
+            <div id="teachers-list" class="tab-content-pane">
+                <h2>Teachers List</h2>
+                <div class="search-container">
+                    <input type="text" id="teacherSearch" class="form-control" placeholder="Search by name or ID...">
+                    <button class="btn btn-secondary" onclick="exportData('teachers')">Export All</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="name">Name</th>
+                            <th data-sort="subject">Subject</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teachersTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="teachers-add" class="tab-content-pane hidden">
+                <h2><span id="teacherModalTitle">Add New Teacher</span></h2>
+                <form id="teacherForm">
+                    <div class="form-group">
+                        <label for="teacherId">Teacher ID:</label>
+                        <input type="text" id="teacherId" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherName">Name:</label>
+                        <input type="text" id="teacherName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherSubject">Subject:</label>
+                        <input type="text" id="teacherSubject" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherPhone">Phone:</label>
+                        <input type="text" id="teacherPhone" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="saveTeacherBtn">Save Teacher</button>
+                </form>
+            </div>
+
+            <div id="teachers-bulk" class="tab-content-pane hidden">
+                <h2>Bulk Actions</h2>
+                <div class="form-group">
+                    <label for="teacherBulkImport">Import Teachers (CSV):</label>
+                    <input type="file" id="teacherBulkImport" accept=".csv" class="form-control">
+                </div>
+                <button class="btn btn-primary" onclick="importData('teachers')">Import Data</button>
+                <hr style="margin: 1rem 0;">
+                <button class="btn btn-secondary" onclick="downloadCsvTemplate('teacher')">Download Teacher
+                    Template</button>
+            </div>
+
+            <!-- New Teacher Analytics Pane -->
+            <div id="teachers-analytics" class="tab-content-pane hidden">
+                <h2>Teacher Attendance Analytics</h2>
+                <div class="filter-container">
+                    <div class="form-group">
+                        <label for="analyticsStartDate">Start Date:</label>
+                        <input type="date" id="analyticsStartDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="analyticsEndDate">End Date:</label>
+                        <input type="date" id="analyticsEndDate" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" onclick="loadTeacherAnalytics()">Generate Analytics</button>
+                    <button class="btn btn-secondary" onclick="downloadAnalyticsImage()">Download Image</button>
+                </div>
+                <div id="teacherAnalyticsResults">
+                    <!-- Analytics cards will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <section id="attendance" class="tab-content hidden">
+            <h2 class="attendance-heading">
+                <span class="material-icons attendance-icon">check_box</span> Attendance
+            </h2>
+            <div class="tab-container">
+                <button class="tab-button active" data-tab-target="#mark-attendance">Mark Attendance</button>
+                <button class="tab-button" data-tab-target="#view-attendance">View Attendance</button>
+            </div>
+
+            <div id="mark-attendance" class="tab-content-pane">
+                <h3>Mark Daily Attendance</h3>
+                <div class="form-group">
+                    <label for="attendanceType">Select Type:</label>
+                    <select id="attendanceType" class="form-control">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="attendanceDate">Date:</label>
+                    <input type="date" id="attendanceDate" class="form-control" required>
+                </div>
+
+                <div class="form-group" id="classFilterGroup" style="display: none;">
+                    <label for="attendanceClassFilter">Filter by Class:</label>
+                    <select id="attendanceClassFilter" class="form-control">
+                        <option value="">All Classes</option>
+                    </select>
+                </div>
+
+                <div class="search-container">
+                    <input type="text" id="attendanceSearch" class="form-control" placeholder="Search...">
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="view-attendance" class="tab-content-pane hidden">
+                <h3>View Attendance Records</h3>
+                <div class="filter-container">
+                    <div class="form-group">
+                        <label for="attendanceReportType">Type:</label>
+                        <select id="attendanceReportType" class="form-control">
+                            <option value="student">Student</option>
+                            <option value="teacher">Teacher</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendanceReportDate">Date:</label>
+                        <input type="date" id="attendanceReportDate" class="form-control" required>
+                    </div>
+                    <div class="form-group" id="viewClassFilterGroup">
+                        <label for="attendanceReportClassFilter">Class:</label>
+                        <select id="attendanceReportClassFilter" class="form-control">
+                            <option value="">All Classes</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="data-table" id="reportTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody"></tbody>
+                </table>
+
+                <h3 style="margin-top: 2rem;">Download Attendance Report</h3>
+                <div class="form-group">
+                    <label for="reportType">Report Type:</label>
+                    <select id="reportType" class="form-control">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reportId">Enter ID (Optional, for individual report):</label>
+                    <input type="text" id="reportId" class="form-control" placeholder="e.g., S-001 or T-001">
+                </div>
+                <div class="form-group">
+                    <label for="reportStartDate">Start Date:</label>
+                    <input type="date" id="reportStartDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="reportEndDate">End Date:</label>
+                    <input type="date" id="reportEndDate" class="form-control">
+                </div>
+                <button class="btn btn-primary" onclick="generateReport()">Download Report</button>
+            </div>
+        </section>
+
+        <!-- New Calendar Section -->
+        <section id="calendar" class="tab-content hidden">
+            <h2>Calendar Management</h2>
+            <div class="calendar-nav">
+                <button id="prevMonth">Previous</button>
+                <span id="currentMonthYear"></span>
+                <button id="nextMonth">Next</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar days will be rendered here by JavaScript -->
+            </div>
+            <div class="calendar-actions">
+                <button class="btn btn-holiday" id="markHoliday">Mark as Holiday</button>
+                <button class="btn btn-working" id="markWorkingDay">Mark as Working Day</button>
+                <button class="btn btn-clear" id="clearDayStatus">Clear Status</button>
+            </div>
+            <p style="margin-top: 1rem; text-align: center; color: #666;">Click on a date to select it, then use
+                the
+                buttons to mark its status.</p>
+        </section>
+
+        <!-- Enhanced Fees Section -->
+        <section id="fees" class="tab-content hidden">
+            <div class="tab-container">
+                <button class="tab-button active" data-tab-target="#fee-records">Fee Records</button>
+                <button class="tab-button" data-tab-target="#add-payment">Add Payment</button>
+                <button class="tab-button" data-tab-target="#fee-structure">Fee Structure</button>
+                <button class="tab-button" data-tab-target="#assign-fees">Assign Fees</button>
+                <button class="tab-button" data-tab-target="#fee-reminders">Fee Reminders</button>
+                <button class="tab-button" data-tab-target="#fee-analytics">Analytics</button>
+            </div>
+
+            <div id="fee-records" class="tab-content-pane">
+                <h2>Fee Records</h2>
+                <div class="filter-container">
+                    <div class="form-group" style="flex-grow: 1;">
+                        <input type="text" id="feeSearch" class="form-control"
+                            placeholder="Search by Student ID, Name, or Receipt Number...">
+                    </div>
+                    <div class="form-group">
+                        <select id="feeClassFilter" class="form-control">
+                            <option value="">Filter by Class</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; font-size:0.85rem; color:#666;">From</label>
+                        <input type="date" id="feeFromDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="display:block; font-size:0.85rem; color:#666;">To</label>
+                        <input type="date" id="feeToDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <select id="feeStatusFilter" class="form-control">
+                            <option value="">Filter by Status</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Partial">Partial</option>
+                            <option value="Unpaid">Unpaid</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-secondary" id="exportFeesCsvBtn">Export CSV</button>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Class</th>
+                            <th>Total Amount</th>
+                            <th>Paid Amount</th>
+                            <th>Balance</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feesTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="add-payment" class="tab-content-pane hidden">
+                <h2>Add Fee Payment</h2>
+                <form id="feeForm">
+                    <div class="form-group" style="position:relative;">
+                        <label for="feeStudentId">Student (search by ID or name):</label>
+                        <input type="text" id="feeStudentId" class="form-control" autocomplete="off"
+                            placeholder="Type student name or ID" required aria-autocomplete="list"
+                            aria-controls="feeStudentSuggestions" aria-expanded="false" aria-haspopup="listbox">
+                        <div id="feeStudentSuggestions" class="suggestions" aria-hidden="true" role="listbox">
+                        </div>
+                        <div id="selectedFeeStudentInfo" class="small muted"
+                            style="margin-top:0.5rem; font-size:0.95rem;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeAmount">Paid Amount:</label>
+                        <input type="number" id="feeAmount" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeDate">Payment Date:</label>
+                        <input type="date" id="feeDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method:</label>
+                        <select id="paymentMethod" class="form-control">
+                            <option value="Cash">Cash</option>
+                            <option value="Online">Online</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount">Discount (%):</label>
+                        <input type="number" id="discount" class="form-control" value="0" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="fine">Fine:</label>
+                        <input type="number" id="fine" class="form-control" value="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="feeNotes">Notes:</label>
+                        <textarea id="feeNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Payment</button>
+                </form>
+            </div>
+
+            <div id="fee-structure" class="tab-content-pane hidden">
+                <h2>Fee Structure Management</h2>
+                <form id="feeStructureForm">
+                    <div class="form-group">
+                        <label for="feeStructureClass">Class:</label>
+                        <input type="text" id="feeStructureClass" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeType">Fee Type:</label>
+                        <select id="feeType" class="form-control">
+                            <option value="Tuition">Tuition Fee</option>
+                            <option value="Admission">Admission Fee</option>
+                            <option value="Exam">Exam Fee</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeStructureAmount">Amount:</label>
+                        <input type="number" id="feeStructureAmount" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="feeDueDate">Due Date:</label>
+                        <input type="date" id="feeDueDate" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Structure</button>
+                </form>
+
+                <table class="data-table" style="margin-top: 2rem;">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Fee Type</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeStructureTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="assign-fees" class="tab-content-pane hidden">
+                <h2>Assign Fees to Student</h2>
+                <div class="form-group">
+                    <label for="assignFeeStudentSelect">Select Student:</label>
+                    <select id="assignFeeStudentSelect" class="form-control"></select>
+                </div>
+                <div id="student-fee-assignment-details"></div>
+                <hr>
+                <h3>Bulk Assign Fees</h3>
+                <p>Assign a fee to all students in a class.</p>
+                <div class="form-group">
+                    <label for="bulkClassSelect">Select Class:</label>
+                    <select id="bulkClassSelect" class="form-control">
+                        <option value="">Select class</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bulkAmount">Amount:</label>
+                    <input type="number" id="bulkAmount" class="form-control" min="0">
+                </div>
+                <div class="form-group">
+                    <label for="bulkDueDate">Due Date:</label>
+                    <input type="date" id="bulkDueDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bulkInstallments">Installments (count):</label>
+                    <input type="number" id="bulkInstallments" class="form-control" min="1" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="bulkFrequency">Frequency:</label>
+                    <select id="bulkFrequency" class="form-control">
+                        <option value="monthly">Monthly</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bulkFirstDueDate">First Installment Date:</label>
+                    <input type="date" id="bulkFirstDueDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="bulkNotes">Notes:</label>
+                    <textarea id="bulkNotes" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="bulkSkipExisting"> Skip students with an existing unpaid
+                        fee of
+                        same amount</label>
+                </div>
+                <div style="display:flex; gap:0.5rem;">
+                    <button class="btn btn-primary" id="previewBulkAssignBtn">Preview</button>
+                    <button class="btn btn-success" id="confirmBulkAssignBtn" disabled>Assign to Class</button>
+                </div>
+                <div id="bulkAssignPreview" style="margin-top:1rem;"></div>
+            </div>
+
+            <div id="fee-reminders" class="tab-content-pane hidden">
+                <h2>Send Fee Reminders</h2>
+                <div class="form-group">
+                    <label for="reminderClassFilter">Filter by Class:</label>
+                    <select id="reminderClassFilter" class="form-control">
+                        <option value="">All Classes</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reminderStatusFilter">Filter by Fee Status:</label>
+                    <select id="reminderStatusFilter" class="form-control">
+                        <option value="Unpaid">Unpaid</option>
+                        <option value="Partial">Partial</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reminderMessage">Reminder Message:</label>
+                    <textarea id="reminderMessage" class="form-control"
+                        rows="5">Dear Parent, this is a reminder that your child's fee payment is due. Please pay the outstanding amount at your earliest convenience. Thank you, TARGET FOUNDATION CENTER.</textarea>
+                </div>
+                <button class="btn btn-primary" onclick="sendFeeReminders()">Send Reminders</button>
+            </div>
+
+            <div id="fee-analytics" class="tab-content-pane hidden">
+                <h2>Fee Analytics</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3 class="card-value" id="totalFeesCollected">0</h3>
+                        <p class="card-label">Total Fees Collected</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-value" id="totalPendingFees">0</h3>
+                        <p class="card-label">Total Pending Fees</p>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <canvas id="feeStatusChart"></canvas>
+                </div>
+                <div style="margin-top:1rem; display:flex; gap:0.5rem; justify-content:flex-end;">
+                    <button class="btn btn-secondary" id="exportReconciliationBtn">Export Reconciliation
+                        CSV</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logout Confirmation Modal -->
+        <div id="logoutModal" class="modal" style="display: none;">
+            <div class="modal-content logout-modal-content">
+                <div class="logout-header">
+                    <div class="logout-icon-container">
+                        <span class="material-icons logout-icon">logout</span>
+                    </div>
+                    <h3>Sign Out</h3>
+                </div>
+                <div class="logout-body">
+                    <p>Are you sure you want to sign out?</p>
+                    <p class="logout-subtext">You will need to login again to access your account.</p>
+                </div>
+                <div class="logout-actions">
+                    <button class="btn btn-secondary" id="cancelLogoutBtn">Cancel</button>
+                    <button class="btn btn-danger" id="confirmLogoutBtn">Sign Out</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fee Receipt Modal -->
+        <div id="receiptModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('receiptModal')">&times;</span>
+                <div id="receipt-display">
+                    <!-- Receipt content will be displayed here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" onclick="printReceipt()">Print</button>
+                    <button class="btn btn-secondary" onclick="downloadReceiptPdf()">Download PDF</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collect Payment Modal -->
+        <div id="collectPaymentModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('collectPaymentModal')">&times;</span>
+                <h3 style="margin-top:0;">Collect Payment</h3>
+                <form id="collectPaymentForm">
+                    <input type="hidden" id="collectFeeId">
+                    <div class="form-group">
+                        <label for="collectStudent">Student:</label>
+                        <div id="collectStudent" style="font-weight:600; margin-bottom:0.5rem;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="collectAmount">Amount:</label>
+                        <input type="number" id="collectAmount" class="form-control" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="collectDate">Payment Date:</label>
+                        <input type="date" id="collectDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="collectMethod">Payment Method:</label>
+                        <select id="collectMethod" class="form-control">
+                            <option value="Cash">Cash</option>
+                            <option value="Online">Online</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="collectNotes">Notes:</label>
+                        <textarea id="collectNotes" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div style="display:flex; gap:0.5rem;">
+                        <button type="submit" class="btn btn-primary">Collect</button>
+                        <button type="button" class="btn btn-secondary"
+                            onclick="closeModal('collectPaymentModal')">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Payments History Modal -->
+        <div id="paymentsModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('paymentsModal')">&times;</span>
+                <h3 style="margin-top:0;">Payment History</h3>
+                <div id="paymentsTitle" style="font-weight:600; margin-bottom:0.5rem;"></div>
+                <div id="paymentsList" style="max-height: 400px; overflow:auto; margin-bottom:1rem;"></div>
+                <div style="display:flex; gap:0.5rem; justify-content:flex-end;">
+                    <button class="btn btn-secondary" onclick="closeModal('paymentsModal')">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Note Modal -->
+        <div id="attendanceNoteModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('attendanceNoteModal')">&times;</span>
+                <h3 style="margin-top:0;">Attendance Note</h3>
+                <div id="attendanceNoteInfo"
+                    style="margin-bottom: 1rem; padding: 0.75rem; background: var(--light); border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">Name:</span>
+                        <span id="noteEntityName">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="font-weight: 600;">Date:</span>
+                        <span id="noteDate">-</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="attendanceNoteText">Note (Why absent/late?):</label>
+                    <textarea id="attendanceNoteText" class="form-control" rows="4"></textarea>
+                    <div id="noteCharCount">0</div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem;">
+                    <button class="btn btn-danger" id="deleteAttendanceNoteBtn" onclick="deleteAttendanceNote()"
+                        style="display: none; margin-right: auto;">Delete
+                        Note</button>
+                    <button class="btn btn-secondary" onclick="closeModal('attendanceNoteModal')">Cancel</button>
+                    <button class="btn btn-primary" onclick="saveAttendanceNote()">Save Note</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

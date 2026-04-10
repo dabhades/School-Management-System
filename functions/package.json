@@ -1,0 +1,21 @@
+{
+    "name": "tms-reminders",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "firebase-admin": "^11.0.0",
+        "firebase-functions": "^4.0.0",
+        "@sendgrid/mail": "^8.8.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.0.1"
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "deploy": "firebase deploy --only functions"
+    },
+    "engines": {
+        "node": "18"
+    }
+}

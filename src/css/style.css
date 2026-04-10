@@ -1,0 +1,2564 @@
+﻿:root {
+    --primary: #7b2cbf;
+    /* Purple primary color */
+    --secondary: #2196f3;
+    /* Blue secondary color */
+    --success: #2ecc71;
+    /* A friendly green */
+    --danger: #e74c3c;
+    /* A strong red */
+    --warning: #f39c12;
+    /* A vibrant orange */
+    --info: #2196f3;
+    /* Blue for info */
+    --light: #f3e5f5;
+    /* Light purple background */
+    --dark: #4a148c;
+    /* Dark purple for text */
+}
+
+/* Global Styles & Mobile-First Approach */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+body {
+    background-color: #faf5ff;
+    background-image: linear-gradient(90deg, #e1d5f0 1px, transparent 1px),
+        linear-gradient(180deg, #ecdcf7 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: var(--dark);
+    font-size: 16px;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h3 {
+    color: var(--dark);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* ---- PREMIUM NAVBAR STYLES ---- */
+/* Main Navbar Container */
+.navbar {
+    background: rgb(76, 10, 114);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 20px rgba(123, 44, 191, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.navbar.scrolled {
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, rgba(123, 44, 191, 0.95) 0%, rgba(90, 30, 143, 0.95) 100%);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.nav-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Hamburger Menu for mobile */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger div {
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left;
+}
+
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(0px, -2px);
+}
+
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(0px, 2px);
+}
+
+/* Navigation Links Container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-link:hover,
+.nav-link.active-link {
+    color: #ffffff;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2196f3;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover::after,
+.nav-link.active-link::after {
+    width: 100%;
+}
+
+/* Logout / auth button styling */
+#authButton {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+    transition: all 0.2s ease;
+    margin-left: 1rem;
+}
+
+#authButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+#authButton:active {
+    transform: translateY(0);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(135deg, #7b2cbf 0%, #5a1e8f 100%);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        gap: 0;
+        z-index: 9999;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .nav-links.active {
+        max-height: 100vh;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 1rem 2rem;
+        color: #e2e8f0;
+        border-left: 3px solid transparent;
+    }
+
+    .nav-link:hover,
+    .nav-link.active-link {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+        border-left-color: #2196f3;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    #authButton {
+        margin: 1rem 2rem;
+        width: calc(100% - 4rem);
+        text-align: center;
+    }
+}
+
+/* Define the animation */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the heading */
+h2 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.9em;
+    font-weight: 700;
+    color: #34495e;
+    animation: slideInFromLeft 0.5s ease-out;
+}
+
+/* ---- PREMIUM DASHBOARD CARDS ---- */
+/* A simple fade-in and slide-up animation for the cards */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container for the cards with a modern grid layout */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Individual card styling */
+.card {
+    background: linear-gradient(135deg, #f3e5f5 0%, #e3f2fd 100%);
+    /* Purple to blue gradient background */
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(123, 44, 191, 0.15);
+    /* Purple shadow for depth */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 2px solid rgba(123, 44, 191, 0.1);
+    /* Smooth transition for hover effects */
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease-in-out;
+    /* Animate cards on initial load */
+    animation: fadeInSlideUp 0.6s ease-out forwards;
+}
+
+/* Individual animation delays for a staggered effect */
+.card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+/* Hover effect to make cards lift and glow */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(123, 44, 191, 0.25);
+}
+
+/* Style for the icon container */
+.card-icon {
+    font-size: 3.5rem;
+    /* Larger icon size */
+    margin-bottom: 1rem;
+    /* Purple to blue gradient for the icon */
+    background: linear-gradient(45deg, #7b2cbf, #2196f3);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Style for the main value (number) */
+.card-value {
+    font-size: 3.5rem;
+    /* Very large for visibility */
+    font-weight: 700;
+    margin: 0.5rem 0;
+    color: var(--dark);
+    line-height: 1;
+}
+
+/* Style for the label text */
+.card-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ---- COMPREHENSIVE SECTION & FORM STYLES ---- */
+
+/* Sections and Tabs */
+.tab-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-button {
+    background: transparent;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #95a5a6;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+.tab-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary);
+    transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tab-button:hover {
+    color: var(--dark);
+}
+
+.tab-button.active {
+    color: var(--primary);
+}
+
+.tab-button.active::after {
+    width: 100%;
+}
+
+.tab-content {
+    padding: 1.5rem 0;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Form and Table Styles */
+
+/* Flexible containers for filters and search */
+.filter-container,
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.filter-container .form-group,
+.search-container .form-group {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+/* Individual form group */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--dark);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* Suggestions dropdown for autocomplete */
+.suggestions {
+    position: absolute;
+    z-index: 1200;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-height: 260px;
+    overflow: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: none;
+}
+
+.suggestion-item {
+    padding: 0.6rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+    background: #f4f8ff;
+}
+
+/* Small devices: make forms full width and stack nicely */
+@media (max-width: 576px) {
+    .form-group {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+}
+
+/* Improve modal responsiveness */
+.modal .modal-content {
+    max-width: 720px;
+    width: 95%;
+}
+
+/* Modal base styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.45);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(123, 44, 191, 0.3);
+    max-width: 680px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--dark);
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0.25rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+    color: var(--danger);
+}
+
+/* Call button used in view modal */
+.call-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #28a745, #2ecc71);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.2);
+    margin-left: 0.5rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.call-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.28);
+}
+
+.call-button .fa-phone {
+    font-size: 1rem;
+}
+
+/* subtle pulse animation to draw attention */
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.40);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    }
+}
+
+.call-button.pulse {
+    animation: pulse-ring 2s infinite;
+}
+
+/* WhatsApp button style */
+.whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25D366, #1ebc57);
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.18);
+    margin-left: 0.5rem;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.whatsapp-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.28);
+}
+
+.whatsapp-button .fa-whatsapp {
+    font-size: 1rem;
+}
+
+/* General responsive modal improvements */
+.modal {
+    padding: 1rem;
+}
+
+.modal .modal-content {
+    position: relative;
+    max-width: 720px;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* Smooth scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal .close-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.6rem;
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+/* Make form groups inside modals stack and be full width */
+.modal .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal .form-control {
+    width: 100%;
+}
+
+/* Modal action/footer layout */
+.modal .modal-actions,
+.modal .btn-group,
+.modal .modal-footer {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+/* Enhanced responsive modal styles for different screen sizes */
+
+/* Tablets and small laptops */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 92%;
+        padding: 1.25rem;
+        max-height: 85vh;
+    }
+
+    .modal-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    .modal {
+        padding: 0.5rem;
+        align-items: flex-end;
+    }
+
+    .modal-content {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 16px 16px 0 0;
+        max-height: 95vh;
+        margin: 0;
+    }
+
+    .modal-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .modal-header h3 {
+        font-size: 1.2rem;
+    }
+
+    .modal .modal-actions button,
+    .modal .btn-group .btn,
+    .modal .modal-footer button {
+        width: 100%;
+        padding: 0.85rem;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+
+    .modal .form-control {
+        font-size: 16px;
+        padding: 0.75rem;
+        min-height: 48px;
+    }
+
+    .modal .form-group label {
+        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
+    }
+
+    /* Make close button more touch-friendly */
+    .modal-close,
+    .modal .close-button {
+        font-size: 2rem;
+        min-width: 48px;
+        min-height: 48px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+    .modal-content {
+        padding: 0.75rem;
+    }
+
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Responsive details grid used in view modal */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.6rem 1rem;
+}
+
+/* Action button layout: icon + text; on small screens hide text and show icon only */
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn .btn-text {
+    display: inline-block;
+}
+
+@media (max-width: 576px) {
+    .action-btn .btn-text {
+        display: none;
+    }
+
+    .data-table td {
+        white-space: normal;
+    }
+
+    .data-table td:first-child {
+        word-break: break-word;
+    }
+
+    .data-table td {
+        vertical-align: middle;
+    }
+
+    .data-table .btn-sm {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Ensure any table inside modal can scroll horizontally on small screens */
+.modal table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Improve readability for long lists in modals */
+.modal .scrollable {
+    max-height: 60vh;
+    overflow: auto;
+}
+
+/* Ensure inputs and selects are comfortable on small screens */
+@media (max-width: 420px) {
+    .form-control {
+        padding: 0.65rem;
+        font-size: 0.95rem;
+    }
+}
+
+
+/* Button Styles */
+.btn {
+    padding: 0.9rem 1.8rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #7b2cbf, #9c27b0);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #6a1b9a, #7b2cbf);
+    /* Darker purple on hover */
+}
+
+.btn-success {
+    background-color: var(--success);
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-warning {
+    background-color: var(--warning);
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: var(--dark);
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+/* ---- PREMIUM & RESPONSIVE DATA TABLE ---- */
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    font-size: 0.95rem;
+}
+
+.data-table thead tr {
+    background-color: #f7f9fc;
+    color: var(--dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.data-table th,
+.data-table td {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.data-table th {
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.data-table th:hover {
+    background-color: #eef1f5;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.3s;
+}
+
+.data-table tbody tr:hover {
+    background-color: #fcfcfc;
+}
+
+.data-table tbody td {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Responsive Table Behavior */
+@media (max-width: 768px) {
+    .data-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        /* Prevents cell content from wrapping */
+    }
+}
+
+/* Alert Messages */
+#app-alert {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: white;
+    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.5s, transform 0.5s, visibility 0.5s;
+    max-width: 90%;
+    word-wrap: break-word;
+}
+
+#app-alert.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.alert-success {
+    background-color: var(--success);
+}
+
+.alert-danger {
+    background-color: var(--danger);
+}
+
+.alert-warning {
+    background-color: var(--warning);
+}
+
+.alert-info {
+    background-color: var(--info);
+}
+
+/* Dashboard Chart Styles */
+.chart-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+}
+
+.chart-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.chart-text span {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.chart-text p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: -5px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 1.0em;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 0.375rem;
+    color: #0b3fb9;
+}
+
+.status-P {
+    background-color: var(--success);
+}
+
+.status-A {
+    background-color: var(--danger);
+}
+
+.status-L {
+    background-color: var(--warning);
+}
+
+.status-NA {
+    background-color: #bdc3c7;
+}
+
+/* Mark Attendance Button feedback */
+.btn.present-marked {
+    background-color: var(--success);
+    color: white;
+}
+
+.btn.absent-marked {
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn.late-marked {
+    background-color: var(--warning);
+    color: white;
+}
+
+
+
+
+/* ---- ELEGANT, MINIMALIST CALENDAR STYLES ---- */
+
+/* Main container with a soft, clean feel */
+#calendar {
+    animation: fadeIn 0.8s ease-out;
+    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- JAW-DROPPING CALENDAR NAVIGATION ---- */
+
+/* Parent container for the navigation, centered and with hover effects */
+.calendar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    /* Important for hiding buttons initially */
+}
+
+/* Current month/year display */
+#currentMonthYear {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 10;
+}
+
+/* Previous & Next buttons */
+#prevMonth,
+#nextMonth {
+    background-color: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 5;
+    white-space: nowrap;
+    /* Prevents text from wrapping */
+}
+
+/* Initial positions (hidden) */
+#prevMonth {
+    left: -150px;
+    /* Hidden to the left */
+}
+
+#nextMonth {
+    right: -150px;
+    /* Hidden to the right */
+}
+
+/* Hover effect on the calendar-nav container */
+.calendar-nav:hover #prevMonth {
+    left: 0;
+}
+
+.calendar-nav:hover #nextMonth {
+    right: 0;
+}
+
+/* Hover effect on the buttons themselves */
+#prevMonth:hover,
+#nextMonth:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Optional: Subtle animation for the month text on hover */
+.calendar-nav:hover #currentMonthYear {
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+/* Media query for smaller screens, so the buttons don't get cut off */
+@media (max-width: 768px) {
+
+    #prevMonth,
+    #nextMonth {
+        /* Keep them visible on small screens for usability */
+        position: static;
+        transform: none;
+        margin: 0 0.5rem;
+    }
+
+    .calendar-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .calendar-nav:hover #prevMonth,
+    .calendar-nav:hover #nextMonth {
+        left: auto;
+        right: auto;
+        transform: none;
+    }
+}
+
+/* Calendar Grid */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.8rem;
+}
+
+/* Day Headers */
+.calendar-day-header {
+    font-weight: 600;
+    text-align: center;
+    padding: 0.8rem 0;
+    color: #a4b0be;
+    /* Muted secondary color */
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Individual Day Cells */
+.calendar-day {
+    padding: 1.2rem 0.5rem;
+    text-align: center;
+    border-radius: 12px;
+    background-color: #f7f9fc;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-day:not(.other-month):hover {
+    background-color: #eef1f5;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Day Number and Status */
+.calendar-day-number {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--dark);
+}
+
+.calendar-day-status {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 5px;
+}
+
+/* Specific Day Statuses */
+.calendar-day.selected {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 5px 20px rgba(74, 105, 189, 0.2);
+    transform: scale(1.02);
+}
+
+.calendar-day.today {
+    background: var(--info);
+    color: white;
+    box-shadow: 0 5px 20px rgba(52, 152, 219, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.calendar-day.holiday {
+    background-color: var(--danger);
+    color: white;
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.2);
+}
+
+.calendar-day.working-day {
+    background-color: var(--success);
+    color: white;
+    box-shadow: 0 5px 20px rgba(46, 204, 113, 0.2);
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+    background-color: #f0f0f0;
+    cursor: default;
+    opacity: 0.7;
+}
+
+/* Calendar Action Buttons */
+.calendar-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.calendar-actions button {
+    padding: 0.9rem 1.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.calendar-actions button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-actions .btn-holiday {
+    background-color: var(--danger);
+}
+
+.calendar-actions .btn-working {
+    background-color: var(--success);
+}
+
+.calendar-actions .btn-clear {
+    background-color: #bdc3c7;
+    color: var(--dark);
+}
+
+/* Small screen responsiveness */
+@media (max-width: 576px) {
+    .calendar-grid {
+        gap: 0.5rem;
+    }
+
+    .calendar-day {
+        min-height: 60px;
+        padding: 0.8rem;
+    }
+
+    .calendar-day-number {
+        font-size: 1rem;
+    }
+
+    .calendar-day-status {
+        font-size: 0.65rem;
+    }
+
+    .calendar-actions {
+        flex-direction: column;
+    }
+
+    .calendar-actions button {
+        width: 100%;
+    }
+}
+
+
+
+/* ---- PREMIUM "LIQUID" ANALYTICS CARDS ---- */
+
+/* A more dynamic and complex animation for the background */
+@keyframes liquidGlow {
+    0% {
+        background-position: 0% 50%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    50% {
+        background-position: 100% 50%;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    100% {
+        background-position: 0% 50%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* On-load slide-in animation for each card */
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.analytics-card {
+    /* Main card container */
+    background: #fff;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    padding: 2.5rem;
+    /* More padding for a premium feel */
+    color: var(--dark);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: cardIn 0.8s ease-out forwards;
+}
+
+/* Pseudo-element for the liquid/glowing border effect */
+.analytics-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #e1d2eb, #f4f8f8, #def393, var(--success));
+    background-size: 400% 400%;
+    border-radius: 22px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Hover effect for the card and the liquid background */
+.analytics-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.analytics-card:hover::before {
+    opacity: 1;
+    animation: liquidGlow 8s infinite ease-in-out;
+}
+
+/* Card Heading - more defined with a subtle icon */
+.analytics-card h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    /* Slightly larger heading */
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Pseudo-element to add a small dot or icon before the title */
+.analytics-card h4::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 0 10px var(--primary);
+    animation: pulse 2s infinite ease-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(26, 188, 156, 0.4);
+    }
+
+    70% {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px var(--primary), 0 0 10px var(--primary);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(26, 188, 156, 0);
+    }
+}
+
+/* Analytics Items - more spaced out and professional */
+.analytics-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.analytics-item:last-child {
+    border-bottom: none;
+}
+
+.analytics-item span:first-child {
+    font-weight: 500;
+    color: #666;
+}
+
+.analytics-item span:last-child {
+    font-weight: 700;
+    color: var(--dark);
+    font-size: 1.1em;
+}
+
+.analytics-item .percentage {
+    color: var(--success);
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
+.analytics-item .percentage.low {
+    color: var(--danger);
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 576px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .card-grid {
+        gap: 1.5rem;
+    }
+
+    .filter-container,
+    .search-container {
+        flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 769px) {
+    .nav-title {
+        margin-bottom: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        gap: 2rem;
+        position: static;
+        box-shadow: none;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .page-content {
+        padding: 2rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 1rem;
+    }
+}
+
+/* Card Icon Styles */
+.card-icon .material-icons {
+    font-size: 48px;
+
+    color: #3498db;
+
+}
+
+/* Teacher icon color */
+.card:nth-child(1) .material-icons {
+    color: #27ae60;
+
+}
+
+/* Student icon color */
+.card:nth-child(2) .material-icons {
+    color: #f39c12;
+
+}
+
+/* Attendance icon color */
+.card:nth-child(3) .material-icons {
+    color: #036d2f;
+}
+
+/* Tablet and small desktop adjustments */
+@media (max-width: 1024px) {
+    .page-content {
+        max-width: 960px;
+        padding: 1rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .filter-container,
+    .search-container {
+        gap: 0.5rem;
+    }
+
+    .filter-container .form-group,
+    .search-container .form-group {
+        flex: 1 1 45%;
+    }
+
+    .tab-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .nav-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 576px) {
+    body {
+        font-size: 15px;
+    }
+
+    .page-content {
+        padding: 0.75rem;
+        /* Add extra top padding to account for sticky navbar height on small screens */
+        padding-top: 5.25rem;
+    }
+
+    .nav-container {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-title {
+        font-size: 1.1rem;
+    }
+
+    .card-grid {
+        gap: 1rem;
+    }
+
+    /* Stack filters and make buttons full width */
+    .filter-container,
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-container .form-group,
+    .search-container .form-group {
+        width: 100%;
+    }
+
+    .filter-container .form-group label {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    /* Make data tables scroll horizontally and reduce padding */
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* Reduce modal max width for mobile */
+    .modal .modal-content {
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    /* Reduce card padding */
+    .card {
+        padding: 1rem;
+    }
+
+    /* Calendar grid becomes smaller */
+    .calendar-grid {
+        gap: 0.4rem;
+    }
+}
+
+/* Extra small screens: make header compress and allow tab overflow */
+@media (max-width: 420px) {
+    .nav-title {
+        font-size: 1rem;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .tab-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tab-button {
+        white-space: nowrap;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* stronger small-screen tab rules: prevent any shrinking and ensure visibility */
+    .tab-container {
+        justify-content: flex-start;
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        z-index: 5;
+    }
+
+    .tab-button {
+        flex: 0 0 auto;
+        min-width: 100px;
+    }
+
+    /* make sure tab container sits above content when navbar is sticky */
+    .tab-container {
+        position: relative;
+        z-index: 1100;
+    }
+}
+
+/* Additional responsive fixes to address overflowing fee tables and filter rows */
+@media (max-width: 768px) {
+
+    /* Stack filters earlier for medium-small devices */
+    .filter-container,
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-container .form-group,
+    .search-container .form-group {
+        width: 100%;
+    }
+
+    /* Allow tab container to scroll horizontally on narrower screens */
+    .tab-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+/* Convert wide tables (especially fee records) into card-like stacked rows on very small screens */
+@media (max-width: 480px) {
+
+    /* Target the fee records table specifically so other tables are unaffected */
+    #fee-records .data-table thead {
+        display: none;
+    }
+
+    #fee-records .data-table,
+    #fee-records .data-table tbody,
+    #fee-records .data-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    #fee-records .data-table tr {
+        margin-bottom: 0.75rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        padding: 0.75rem;
+        border: 1px solid #f0f0f0;
+    }
+
+    #fee-records .data-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0.5rem;
+        font-size: 0.95rem;
+        border: none;
+    }
+
+    /* Use nth-child to insert labels for each column in the card layout */
+    #fee-records .data-table td:nth-child(1)::before {
+        content: "Student ID";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(2)::before {
+        content: "Name";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(3)::before {
+        content: "Class";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(4)::before {
+        content: "Total";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(5)::before {
+        content: "Paid";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(6)::before {
+        content: "Balance";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(7)::before {
+        content: "Due";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(8)::before {
+        content: "Status";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    #fee-records .data-table td:nth-child(9)::before {
+        content: "Actions";
+        font-weight: 600;
+        color: #666;
+        margin-right: 0.5rem;
+    }
+
+    /* Make long text wrap nicely */
+    #fee-records .data-table td span,
+    #fee-records .data-table td div {
+        white-space: normal;
+        max-width: 65%;
+        text-align: right;
+        color: var(--dark);
+    }
+
+    /* Reduce padding on modal/content to avoid horizontal overflow */
+    .page-content {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+/* ---- ELEGANT, MINIMALIST CALENDAR STYLES ---- */
+
+/* Main container with a soft, clean feel */
+#calendar {
+    animation: fadeIn 0.8s ease-out;
+    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---- JAW-DROPPING CALENDAR NAVIGATION ---- */
+
+/* Parent container for the navigation, centered and with hover effects */
+.calendar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    /* Important for hiding buttons initially */
+}
+
+/* Current month/year display */
+#currentMonthYear {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+    /* Ensure text is above any background elements */
+    transition: color 0.3s ease;
+}
+
+#currentMonthYear:hover {
+    color: var(--primary);
+    /* Change color on hover */
+}
+
+/* Navigation buttons (Previous/Next) */
+.calendar-nav button {
+    background: transparent;
+    border: 2px solid transparent;
+    /* Transparent border initially */
+    color: var(--secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    /* Circular buttons */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy transition */
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-nav button:hover {
+    color: var(--primary);
+    background: rgba(74, 105, 189, 0.1);
+    /* Light primary background */
+    transform: scale(1.2) rotate(5deg);
+    /* Slight rotation and scale */
+    border-color: var(--primary);
+    /* Show border on hover */
+    box-shadow: 0 0 15px rgba(74, 105, 189, 0.3);
+    /* Glow effect */
+}
+
+.calendar-nav button:active {
+    transform: scale(0.95);
+    /* Click effect */
+}
+
+
+/* ---- THE CALENDAR GRID: A MASTERPIECE OF LAYOUT ---- */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 equal columns */
+    gap: 15px;
+    /* Space between cells */
+    margin-bottom: 2rem;
+}
+
+/* Day Headers (Sun, Mon, Tue...) */
+.calendar-day-header {
+    text-align: center;
+    font-weight: 700;
+    color: var(--secondary);
+    padding: 1rem 0;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f0f0f0;
+    /* Subtle separator */
+    margin-bottom: 10px;
+}
+
+/* Individual Day Cells */
+.calendar-day {
+    background: #ffffff;
+    border-radius: 15px;
+    /* Rounded corners */
+    min-height: 120px;
+    /* Taller cells for elegance */
+    padding: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid #f5f5f5;
+    /* Very subtle border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    /* Minimal shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Align content to top */
+    align-items: flex-start;
+    overflow: hidden;
+    /* Clip overflow content */
+}
+
+/* Hover effect for day cells */
+.calendar-day:hover {
+    transform: translateY(-5px);
+    /* Lift up */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    /* Stronger shadow */
+    border-color: var(--primary);
+    /* Highlight border */
+    z-index: 2;
+    /* Bring to front */
+}
+
+/* Selected Day Styling */
+.calendar-day.selected {
+    border: 2px solid var(--primary);
+    background-color: rgba(74, 105, 189, 0.03);
+    /* Very light blue tint */
+    transform: scale(1.02);
+    /* Slightly larger */
+    box-shadow: 0 0 0 4px rgba(74, 105, 189, 0.1);
+    /* Focus ring */
+}
+
+/* Day Number Styling */
+.calendar-day-number {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    /* Circle for the number */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Today's Date Styling */
+.calendar-day.today .calendar-day-number {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(74, 105, 189, 0.4);
+}
+
+/* Days from other months (faded) */
+.calendar-day.other-month {
+    background-color: #fafafa;
+    color: #ccc;
+    cursor: default;
+    border: none;
+    box-shadow: none;
+}
+
+.calendar-day.other-month:hover {
+    transform: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* Status Indicators (Holiday/Working Day) */
+.calendar-day-status {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 12px;
+    /* Pill shape */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: auto;
+    /* Push to bottom */
+    align-self: flex-start;
+    /* Align left */
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Holiday Style */
+.calendar-day.holiday {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe3e3 100%);
+    border-color: #ffcccc;
+}
+
+.calendar-day.holiday .calendar-day-status {
+    background-color: #ffebee;
+    color: var(--danger);
+}
+
+/* Working Day Style */
+.calendar-day.working-day {
+    background: linear-gradient(135deg, #f0fff4 0%, #dcfce7 100%);
+    border-color: #c6f6d5;
+}
+
+.calendar-day.working-day .calendar-day-status {
+    background-color: #e8f5e9;
+    color: var(--success);
+}
+
+
+/* ---- ACTION BUTTONS: CLEAN & MODERN ---- */
+
+.calendar-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.calendar-actions button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    /* Pill buttons */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calendar-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-holiday {
+    background-color: #fff;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+
+.btn-holiday:hover {
+    background-color: var(--danger);
+    color: #fff;
+}
+
+.btn-working {
+    background-color: #fff;
+    color: var(--success);
+    border: 2px solid var(--success);
+}
+
+.btn-working:hover {
+    background-color: var(--success);
+    color: #fff;
+}
+
+.btn-clear {
+    background-color: #fff;
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
+}
+
+.btn-clear:hover {
+    background-color: var(--secondary);
+    color: #fff;
+}
+
+
+/* ---- RESPONSIVE MAGIC ---- */
+
+@media (max-width: 768px) {
+    #calendar {
+        padding: 1.5rem;
+    }
+
+    #currentMonthYear {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .calendar-grid {
+        gap: 8px;
+        /* Smaller gap on mobile */
+    }
+
+    .calendar-day {
+        min-height: 80px;
+        /* Shorter cells */
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .calendar-day-number {
+        width: 24px;
+        height: 24px;
+        font-size: 0.9rem;
+    }
+
+    .calendar-day-status {
+        font-size: 0.6rem;
+        padding: 2px 4px;
+    }
+
+    .calendar-actions {
+        gap: 1rem;
+    }
+
+    .calendar-actions button {
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-day-header {
+        font-size: 0.7rem;
+        /* Abbreviated headers */
+    }
+
+    .calendar-day {
+        min-height: 60px;
+    }
+
+    .calendar-day-status {
+        display: none;
+        /* Hide status text on very small screens, use color only */
+    }
+
+    /* Use a dot for status instead */
+    .calendar-day.holiday::after {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: var(--danger);
+        border-radius: 50%;
+        margin-top: auto;
+        align-self: center;
+    }
+
+    .calendar-day.working-day::after {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: var(--success);
+        border-radius: 50%;
+        margin-top: auto;
+        align-self: center;
+    }
+}
+
+/* ---- EVENT INDICATORS & INPUT FORM ---- */
+
+/* Event Label on Calendar Day */
+.calendar-day-status {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-top: auto;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #f0f0f0;
+    /* Default background */
+    color: #333;
+    font-weight: 500;
+}
+
+/* Specific Event Types */
+.calendar-day.meeting .calendar-day-status {
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: 1px solid #bbdefb;
+}
+
+.calendar-day.exam .calendar-day-status {
+    background-color: #fff3e0;
+    color: #f57c00;
+    border: 1px solid #ffe0b2;
+}
+
+.calendar-day.other .calendar-day-status {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+    border: 1px solid #e1bee7;
+}
+
+/* Event Input Section Animation */
+#event-input-section {
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Adjustments for Events */
+@media (max-width: 480px) {
+    .calendar-day-status {
+        font-size: 0.6rem;
+        padding: 1px 3px;
+    }
+
+    /* On very small screens, maybe just show a dot color */
+    .calendar-day.meeting .calendar-day-status,
+    .calendar-day.exam .calendar-day-status,
+    .calendar-day.other .calendar-day-status {
+        text-indent: -9999px;
+        /* Hide text */
+        width: 6px;
+        height: 6px;
+        padding: 0;
+        border-radius: 50%;
+        margin: 0 auto;
+        border: none;
+    }
+
+    .calendar-day.meeting .calendar-day-status {
+        background-color: #1976d2;
+    }
+
+    .calendar-day.exam .calendar-day-status {
+        background-color: #f57c00;
+    }
+
+    .calendar-day.other .calendar-day-status {
+        background-color: #7b1fa2;
+    }
+}
+
+/* --- ATTENDANCE NOTE BUTTON STYLES --- */
+
+.btn-info {
+    background-color: var(--info);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #1976d2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+}
+
+/* Note button with note indicator */
+.btn-info.has-note {
+    background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+    position: relative;
+    font-weight: 600;
+}
+
+.btn-info.has-note::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    background-color: #f39c12;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Modal styles for note modal */
+#attendanceNoteModal .modal-content {
+    max-width: 500px;
+}
+
+#attendanceNoteInfo {
+    background: var(--light);
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+#attendanceNoteText {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Mobile responsive for note button */
+@media (max-width: 768px) {
+    .btn-info {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .btn-info.has-note::after {
+        width: 8px;
+        height: 8px;
+        top: -3px;
+        right: -3px;
+    }
+}
+
+/* Logout Modal Styles */
+.logout-modal-content {
+    max-width: 400px;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.logout-header {
+    margin-bottom: 1.5rem;
+}
+
+.logout-icon-container {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+}
+
+.logout-icon {
+    font-size: 40px;
+    color: #d63031;
+}
+
+.logout-header h3 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.logout-body {
+    margin-bottom: 2rem;
+}
+
+.logout-body p {
+    color: #555;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.logout-subtext {
+    font-size: 0.9rem !important;
+    color: #888 !important;
+}
+
+.logout-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.logout-actions .btn {
+    min-width: 120px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.logout-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logout-actions .btn-secondary {
+    background: #f1f2f6;
+    color: #57606f;
+    border: none;
+}
+
+.logout-actions .btn-secondary:hover {
+    background: #dfe4ea;
+}
+
+.logout-actions .btn-danger {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5253 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(238, 82, 83, 0.4);
+}
+
+.logout-actions .btn-danger:hover {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+}
