@@ -1,4 +1,4 @@
-# Target Foundation Center - Tuition Management System
+# Tuition/School Management System
 
 A comprehensive, real-time web application to manage tuition center operations natively using HTML, CSS, JavaScript, and Firebase. This system enables administrators to effortlessly manage students, teachers, fees, attendance, and analytics.
 
@@ -73,4 +73,4 @@ This project is configured out-of-the-box for Firebase Hosting.
 
 ---
 
-Developed with ❤️ for Target Foundation Center.
+Developed with ❤️ by Sopan Dabhade 
